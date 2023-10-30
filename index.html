@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Embed</title>
+    <script>
+        function embedYouTube() {
+            var userInput = prompt("Please paste a YouTube link (youtu.be or youtube.com):");
+            if (userInput) {
+                var videoId = extractVideoId(userInput);
+                if (videoId) {
+                    var embedUrl = "https://www.youtube-nocookie.com/embed/" + videoId;
+                    location.href = embedUrl;
+                } else {
+                    alert("Invalid YouTube link. Please use a valid link.");
+                }
+            }
+        }
+
+        function extractVideoId(url) {
+            var videoId;
+            var match = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+            if (match) {
+                videoId = match[1];
+            } else {
+                var shortLinkMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+                if (shortLinkMatch) {
+                    videoId = shortLinkMatch[1];
+                }
+            }
+            return videoId;
+        }
+    </script>
+</head>
+<body>
+    <button onclick="embedYouTube()">Embed YouTube Video</button>
+</body>
+</html>
